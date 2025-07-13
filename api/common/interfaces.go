@@ -502,7 +502,7 @@ func getBalanceByAddr(s Serverer, params map[string]interface{}, ctx context.Con
 	return respPacking(errcode.SUCCESS, ret)
 }
 
-// getBalanceByAssetID gets balance by address
+// GetBalanceByAssetID gets balance by address
 // params: {"address":<address>, "assetid":<assetid>}
 // return: {"resultOrData":<result>|<error data>, "error":<errcode>}
 func GetBalanceByAssetID(s Serverer, params map[string]interface{}, ctx context.Context) map[string]interface{} {
@@ -585,7 +585,7 @@ func getNonceByAddr(s Serverer, params map[string]interface{}, ctx context.Conte
 	return respPacking(errcode.SUCCESS, ret)
 }
 
-// getId gets id by publick key
+// getId gets id by public key
 // params: {"publickey":<publickey>}
 // return: {"resultOrData":<result>|<error data>, "error":<errcode>}
 func getId(s Serverer, params map[string]interface{}, ctx context.Context) map[string]interface{} {
@@ -821,7 +821,7 @@ func getSubscribersCount(s Serverer, params map[string]interface{}, ctx context.
 		}
 	}
 
-	key := []byte(fmt.Sprintf("%s-%d-%s", topic, int(bucket), string(subscriberHashPrefix)))
+	key := fmt.Appendf(nil, "%s-%d-%s", topic, int(bucket), string(subscriberHashPrefix))
 
 	if v, ok := rpcResultCache.Get(key); ok {
 		if count, ok := v.(int); ok {
@@ -932,7 +932,7 @@ func findSuccessorAddrs(s Serverer, params map[string]interface{}, ctx context.C
 	return respPacking(errcode.SUCCESS, addrs)
 }
 
-// Depracated, use findSuccessorAddrs instead
+// Deprecated, use findSuccessorAddrs instead
 func findSuccessorAddr(s Serverer, params map[string]interface{}, ctx context.Context) map[string]interface{} {
 	if len(params) < 1 {
 		return respPacking(errcode.INVALID_PARAMS, "length of params is less than 1")
